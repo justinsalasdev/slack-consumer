@@ -50,6 +50,7 @@ export default function Login() {
           "access-token": response.headers.get("access-token"),
           expiry: response.headers.get("expiry"),
           uid: response.headers.get("uid"),
+          id: jsonData.data.id,
           client: response.headers.get("client")
         };
         console.log(userData); //may save userData to context to access globally

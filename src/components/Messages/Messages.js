@@ -1,19 +1,32 @@
 import { useEffect, useState } from "react";
 
-export default function Users() {
+const receiver = {
+  id: 32
+};
+
+const loggedInUser = {
+  "access-token": "Q7h2aN07TFCt1J5UJF3E8A",
+  client: "IWStMJ7NjixPmLPQAiG6wQ",
+  expiry: "1626967169",
+  id: 31,
+  uid: "m1@m.com"
+};
+
+export default function Messages() {
   //can be batched using useReducer hook
   const [isLoading, setLoading] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
-    const endPoint = "http://206.189.91.54//api/v1/users";
+    const endPoint = `http://206.189.91.54//api/v1/messages?receiver_class=User&receiver_id=${receiver.id}&sender_id=${loggedInUser.id}`;
     const options = {
       headers: {
+        cors: "no-cors",
         //get header data from login response *see Login.js snippet
-        "access-token": "08v0MnoeqXMwRWGw14yDbw",
-        client: "MICRiOHS7JIsl2mfo4bHYw",
-        expiry: "1626957231",
-        uid: "mail@mail.com"
+        "access-token": "Q7h2aN07TFCt1J5UJF3E8A",
+        client: "IWStMJ7NjixPmLPQAiG6wQ",
+        expiry: "1626967169",
+        uid: "m1@m.com"
       }
     };
 
@@ -26,7 +39,7 @@ export default function Users() {
 
         if (response.status === 200) {
           console.log(jsonData);
-          setUsers(jsonData.data);
+          setMessages(jsonData.data.messages);
           setLoading(false);
         } else {
           //catch will get this error
@@ -42,21 +55,21 @@ export default function Users() {
   }, []);
 
   return (
-    <div className="users">
-      <h3>USERS</h3>
-      <p>{error || "---"}</p>
+    <div className="messages">
+      <h3>Chat Box</h3>
+      <pre>[messages of m1@m.com and m2@m.com : m1 perspective]</pre>
       {(!isLoading && (
-        <ul className="users__list">
-          {users.map(({ id, uid }) => {
+        <ul className="messages__list">
+          {messages.map(message => {
             return (
-              <li key={id} className="users__user">
-                {uid}
+              <li key={message.id} className="messages__message">
+                {message.body}
               </li>
             );
           })}
         </ul>
       )) ||
-        "...LOADING"}
+        "...loading"}
     </div>
   );
 }
