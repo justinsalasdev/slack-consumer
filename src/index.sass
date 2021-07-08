@@ -1,0 +1,57 @@
+*,
+*::before,
+*::after
+  margin: 0
+  padding: 0
+  box-sizing: inherit
+
+//base styles
+html
+  font-size: 62.5%
+  height: 100%
+
+body
+  font-family: sans-serif
+  box-sizing: border-box
+  font-size: 1.5rem
+  min-height: 100%
+
+  display: grid
+
+#root
+  padding: 1rem
+  width: 100%
+  height: 100%
+  display: flex
+  align-items: flex-start
+  gap: 1rem
+  // justify-content: space-around
+
+button,
+input
+  font-size: inherit
+
+//component styles
+.login,
+.signup
+  padding: 1rem
+  border: 1px solid black
+  // width: 30%
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  &__input
+    padding: 1rem
+    margin-block: 1rem
+
+  &__action
+    padding: .5rem
+
+.users
+  padding: 1rem
+  border: 1px solid black
+  &__list
+    list-style: none
+  &__user
+    padding: .5rem
