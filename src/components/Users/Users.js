@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function Users() {
+  //can be batched using useReducer hook
   const [isLoading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
@@ -8,13 +9,15 @@ export default function Users() {
     const endPoint = "http://206.189.91.54//api/v1/users";
     const options = {
       headers: {
-        //get header data from login response
+        //get header data from login response *see Login.js snippet
         "access-token": "08v0MnoeqXMwRWGw14yDbw",
         client: "MICRiOHS7JIsl2mfo4bHYw",
         expiry: "1626957231",
         uid: "mail@mail.com"
       }
     };
+
+    //Immediately invoked function expressions
     (async () => {
       try {
         setLoading(true);
@@ -35,13 +38,13 @@ export default function Users() {
         setError(err?.custom || "something went wrong");
         setLoading(false);
       }
-    })();
+    })(); //invocation here
   }, []);
 
   return (
     <div className="users">
       <h3>USERS</h3>
-      <p>{error || "-error goes here-"}</p>
+      <p>{error || "---"}</p>
       {(!isLoading && (
         <ul className="users__list">
           {users.map(({ id, uid }) => {

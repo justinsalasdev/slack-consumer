@@ -29,8 +29,6 @@ export default function Signup() {
         password_confirmation: password
       };
 
-      console.log(data);
-
       const endPoint = "http://206.189.91.54//api/v1/auth/";
       const options = {
         method: "post",
@@ -45,15 +43,19 @@ export default function Signup() {
       const response = await fetch(endPoint, options);
       const jsonData = await response.json();
 
-      if (response.status !== 200) {
-        setError(jsonData?.errors?.full_messages[0] || "something wen't wrong");
+      if (response.status === 200) {
+        alert("sign up success!");
         setLoading(false);
+      } else {
+        throw {
+          //set custom error base on server response
+          //catch block will get this
+          custom: jsonData?.errors?.full_messages[0] || "failed to signup"
+        };
       }
-
-      console.log(jsonData);
-      setLoading(false);
     } catch (err) {
       console.log(err);
+      setError(err?.custom || "something went wrong");
       setLoading(false);
     }
   }

@@ -28,8 +28,6 @@ export default function Login() {
         password
       };
 
-      console.log(data);
-
       const endPoint = "http://206.189.91.54//api/v1/auth/sign_in";
       const options = {
         method: "post",
@@ -46,6 +44,7 @@ export default function Login() {
       const jsonData = await response.json();
 
       if (response.status === 200) {
+        alert("login success!");
         //save needed access data
         const userData = {
           "access-token": response.headers.get("access-token"),
@@ -53,7 +52,7 @@ export default function Login() {
           uid: response.headers.get("uid"),
           client: response.headers.get("client")
         };
-        console.log(userData); //save to context to access globally
+        console.log(userData); //may save userData to context to access globally
         setLoading(false);
       } else {
         //throw custom error that will go to catch block
