@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useUserDispatcher } from "../../managers/userManager";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -7,6 +8,9 @@ export default function Login() {
   //can be batched using useReducer hook
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
+
+  //userManager hooks
+  const userDispatch = useUserDispatcher();
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -52,6 +56,8 @@ export default function Login() {
           uid: response.headers.get("uid"),
           client: response.headers.get("client")
         };
+
+        userDispatch({ type: "save", payload: userData }); //save userData to userContext
         console.log(userData); //may save userData to context to access globally
         setLoading(false);
       } else {

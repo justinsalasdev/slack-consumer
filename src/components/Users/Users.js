@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { useUserState } from "../../managers/userManager";
 
 export default function Users() {
+  //from userManager
+  const userState = useUserState();
+
   //can be batched using useReducer hook
   const [isLoading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -10,10 +14,12 @@ export default function Users() {
     const options = {
       headers: {
         //get header data from login response *see Login.js snippet
-        "access-token": "08v0MnoeqXMwRWGw14yDbw",
-        client: "MICRiOHS7JIsl2mfo4bHYw",
-        expiry: "1626957231",
-        uid: "mail@mail.com"
+
+        // "access-token": "08v0MnoeqXMwRWGw14yDbw",
+        // client: "MICRiOHS7JIsl2mfo4bHYw",
+        // expiry: "1626957231",
+        // uid: "mail@mail.com"
+        ...userState.user
       }
     };
 
