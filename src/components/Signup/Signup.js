@@ -45,6 +45,15 @@ export default function Signup() {
 
       if (response.status === 200) {
         alert("sign up success!");
+
+        //SIGNUP Also returns access data - so user don't need to login after
+        // const userData = {
+        //   "access-token": response.headers.get("access-token"),
+        //   expiry: response.headers.get("expiry"),
+        //   uid: response.headers.get("uid"),
+        //   id: jsonData.data.id,
+        //   client: response.headers.get("client")
+        // };
         setLoading(false);
       } else {
         throw {
