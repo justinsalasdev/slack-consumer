@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 const receiver = {
   id: 32
@@ -12,24 +13,33 @@ const loggedInUser = {
   uid: "m1@m.com"
 };
 
+const endPoint = `http://206.189.91.54//api/v1/messages?receiver_class=User&receiver_id=${receiver.id}&sender_id=${loggedInUser.id}`;
+const options = {
+  headers: {
+    cors: "no-cors",
+    //get header data from login response *see Login.js snippet
+    "access-token": "Q7h2aN07TFCt1J5UJF3E8A",
+    client: "IWStMJ7NjixPmLPQAiG6wQ",
+    expiry: "1626967169",
+    uid: "m1@m.com"
+  }
+};
+
 export default function Messages() {
+  //with swr
+  const fetcher = (...args) => fetch(...args).then(res => res.json());
+  const { data, error: swrError } = useSWR([endPoint, options], fetcher, {
+    refreshInterval: 1000
+  });
+  console.log("SWR", data, swrError);
+
+  // console.log(data?.data.messages);
+
   //can be batched using useReducer hook
   const [isLoading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
-    const endPoint = `http://206.189.91.54//api/v1/messages?receiver_class=User&receiver_id=${receiver.id}&sender_id=${loggedInUser.id}`;
-    const options = {
-      headers: {
-        cors: "no-cors",
-        //get header data from login response *see Login.js snippet
-        "access-token": "Q7h2aN07TFCt1J5UJF3E8A",
-        client: "IWStMJ7NjixPmLPQAiG6wQ",
-        expiry: "1626967169",
-        uid: "m1@m.com"
-      }
-    };
-
     //Immediately invoked function expressions
     (async () => {
       try {
@@ -60,7 +70,7 @@ export default function Messages() {
       <pre>[messages of m1@m.com and m2@m.com : m1 perspective]</pre>
       {(!isLoading && (
         <ul className="messages__list">
-          {messages.map(message => {
+          {(data?.data?.messages || []).map(message => {
             return (
               <li key={message.id} className="messages__message">
                 {message.body}

@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react";
+import useSWR from "swr";
+
+const endPoint = "http://206.189.91.54//api/v1/users";
+const options = {
+  headers: {
+    //get header data from login response *see Login.js snippet
+    Accept: "application/json",
+    "access-token": "08v0MnoeqXMwRWGw14yDbw",
+    client: "MICRiOHS7JIsl2mfo4bHYw",
+    expiry: "1626957231",
+    uid: "mail@mail.com"
+  }
+};
 
 export default function Users() {
+  //with swr
+  const fetcher = (...args) => fetch(...args).then(res => res.json());
+  const { data, error: swrError } = useSWR([endPoint, options], fetcher, {
+    refreshInterval: 1000
+  });
+  console.log("SWR", data, swrError);
+
   //can be batched using useReducer hook
   const [isLoading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
-    const endPoint = "http://206.189.91.54//api/v1/users";
-    const options = {
-      headers: {
-        //get header data from login response *see Login.js snippet
-        "access-token": "08v0MnoeqXMwRWGw14yDbw",
-        client: "MICRiOHS7JIsl2mfo4bHYw",
-        expiry: "1626957231",
-        uid: "mail@mail.com"
-      }
-    };
-
     //Immediately invoked function expressions
     (async () => {
       try {

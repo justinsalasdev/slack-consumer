@@ -59,7 +59,7 @@ export default function ChatBar() {
       const jsonData = await response.json();
 
       if (response.status === 200) {
-        alert("message sent");
+        // alert("message sent");
         console.log(jsonData);
         setLoading(false);
       } else {
