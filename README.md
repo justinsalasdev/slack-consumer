@@ -1,1 +1,1 @@
-### slack-api how to consume snippets
+### slack-api consumption code snippets
