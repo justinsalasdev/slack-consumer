@@ -38,7 +38,7 @@ export default function Messages() {
         const jsonData = await response.json();
 
         if (response.status === 200) {
-          console.log(jsonData);
+          // console.log(jsonData);
           setMessages(jsonData.data.messages);
           setLoading(false);
         } else {

@@ -25,7 +25,7 @@ export default function Users() {
         const jsonData = await response.json();
 
         if (response.status === 200) {
-          console.log(jsonData);
+          // console.log(jsonData);
           setUsers(jsonData.data);
           setLoading(false);
         } else {

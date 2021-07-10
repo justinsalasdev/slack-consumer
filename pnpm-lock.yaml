@@ -4,6 +4,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.14.1
   '@testing-library/react': ^11.2.7
   '@testing-library/user-event': ^12.8.3
+  fuse.js: ^6.4.6
   node-sass: ^6.0.1
   react: ^17.0.2
   react-dom: ^17.0.2
@@ -14,6 +15,7 @@ dependencies:
   '@testing-library/jest-dom': 5.14.1
   '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
   '@testing-library/user-event': 12.8.3
+  fuse.js: 6.4.6
   node-sass: 6.0.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -5699,6 +5701,11 @@ packages:
 
   /functional-red-black-tree/1.0.1:
     resolution: {integrity: sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=}
+    dev: false
+
+  /fuse.js/6.4.6:
+    resolution: {integrity: sha512-/gYxR/0VpXmWSfZOIPS3rWwU8SHgsRTwWuXhyb2O6s7aRuVtHtxCkR33bNYu3wyLyNx/Wpv0vU7FZy8Vj53VNw==}
+    engines: {node: '>=10'}
     dev: false
 
   /gauge/2.7.4:

@@ -23,9 +23,14 @@ body
   width: 100%
   height: 100%
   display: flex
+  justify-content: flex-start
   align-items: flex-start
+  flex-wrap: wrap
   gap: 1rem
   // justify-content: space-around
+
+ul
+  list-style: none
 
 textarea,
 button,
@@ -51,6 +56,8 @@ input
     padding: .5rem
 
 .users
+  height: 30rem
+  overflow-y: auto
   padding: 1rem
   border: 1px solid black
   &__list
@@ -67,8 +74,42 @@ input
     margin-bottom: .5rem
 
 .messages
+  height: 30rem
+  overflow-y: auto
   border: 1px solid black
   padding: 1rem
 
   &__list
     list-style: none
+
+.maker
+  border: 1px solid black
+  padding: 1rem
+
+  &__name,
+  &__search,
+    display: block
+    padding: .5rem
+    margin: .5rem
+
+  &__action
+    padding: .5rem
+    margin: .5rem
+
+  &__selection,
+  &__options
+    height: 20rem
+    overflow-y: auto
+    margin: .5rem
+    border: 1px solid black
+    padding: 1rem
+
+  &__selection
+    height: 10rem
+
+  &__option,
+  &__select
+    cursor: pointer
+    padding: .3rem
+    &:hover
+      background: lightyellow
