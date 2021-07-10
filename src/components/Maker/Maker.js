@@ -3,7 +3,6 @@ import { tempData } from "./users";
 import Fuse from "fuse.js";
 
 const users = tempData.data;
-
 const loggedInUser = {
   //current user logged in
   //get user detail after Login or Signup
